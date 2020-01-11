@@ -1,0 +1,14 @@
+venv/
+.vscode/
+music/db.sqlite3
+music/media/
+music/static/js/*
+music/music/media/
+music/music/static/
+music/music/__pycache__/*
+music/album/migrations/
+music/album/static/
+music/album/__pycache__/*
+music/user/migrations/
+music/user/__pycache__/*
+

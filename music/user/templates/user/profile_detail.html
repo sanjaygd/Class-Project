@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block main %}
+<div class="row">
+    <div class="col md-6">
+            <table class="table table-light table-bordered table-striped">
+                <tbody>
+                    <tr>
+                        <th>Username</th>
+                        <td>{{object.username}}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{object.email}}</td>
+                    </tr>
+                    <tr>
+                        <th>Birth date</th>
+                        <td>{{object.profile.birth_date}}</td>
+                    </tr>                                        
+                </tbody>
+            </table>
+            <div class="text-right">
+                <a class="btn btn-warning" href="{%  url 'user:edit_profile' pk=object.profileimage.id %}">Edit Profile</a>
+            </div>
+    </div>
+
+    <div class="col md-6">
+        <img src="{{object.profileimage.image.url}}">
+    </div>
+</div>
+
+{% endblock %}

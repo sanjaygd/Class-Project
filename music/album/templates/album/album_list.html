@@ -1,0 +1,96 @@
+{% extends 'album/base.html' %}
+
+{% block content %}
+
+
+
+  <div class="container">
+    {% if object_list %}
+        {% for album in object_list %}
+
+        <div class="card my-3">
+            <div class="card-header">
+              Featured
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">
+                
+                    <a href="{% url 'music:detail_view' pk=album.id %}"><strong>{{album.title}}</strong></a>
+                    {{album.vote}}
+              </h5>
+              <p class="card-text">{{album.discription}}.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div><br>
+        {% endfor %}
+        {{page_obj.class_id}} @ {{timestamp}}
+        component_name {{host}} {{timestamp}}
+    {% else %}
+
+    <h2>There are no albums available yet</h2>
+
+    {% endif %}
+
+    {% for vote in album.vote %}
+          {{vote.song_title}}
+
+    {% endfor %}
+
+
+
+    <!-- <div class="loading" style="display: none;">
+            Loading...
+    </div>
+
+
+    {% if page_obj.has_next %}
+    <a class="infinite-more-link" href="?page={{ page_obj.next_page_number }}">More</a>
+    {% endif %}
+
+
+    {% block js %}
+
+    <script>
+        console.log('test')
+        var infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            onBeforePageLoad: function () {
+            $('.loading').show();
+            },
+            onAfterPageLoad: function ($items) {
+            $('.loading').hide();
+            }
+        });
+    </script>
+    {% endblock %} -->
+
+
+
+
+<!-- PAGINATION -->
+
+    {% if is_paginated %}
+                 
+      <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+      
+              <span class="current">
+                  Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+              </span>
+      
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">next</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
+    {% endif %} 
+
+  </div>
+
+  
+{% endblock %}

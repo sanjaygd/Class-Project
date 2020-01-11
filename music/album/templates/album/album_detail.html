@@ -1,0 +1,33 @@
+{% extends 'album/base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    {% if object %}
+
+    <h4>Title of the album : {{object.title}}</h4>
+    <h4>Description : {{object.discription}}</h4>
+    <h4>Sung by : {{object.album_creator}}</h4>
+    <h4 class="con-clock">Published on : {{ object.created}}</h4>  <!--|timesince we can use this after timestamp-->
+    
+    {% for song in object.songs %}
+
+    <h4>{{song.song_title}}</h4>
+
+    {% endfor %}
+
+   
+
+    <a href="{% url 'music:update_view' pk=object.id %}"><button>Update</button></a>
+    <a href="{% url 'music:delete_view' pk=object.id %}"><button>Delete</button></a>
+
+
+    {% else %}
+
+    <h4>There is no information available on this album</h4>
+
+    {% endif %}
+
+    {% endblock %}
+
+</div>

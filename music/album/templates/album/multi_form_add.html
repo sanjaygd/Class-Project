@@ -1,0 +1,26 @@
+{% extends 'album/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <form method="POST">
+                {% csrf_token %}
+                <table class="table table-bordered table-light">
+                    {{singer_form|crispy}}
+                    {{album_form|crispy}}
+                    {{song_form}}
+                    
+                </table>
+                <br>
+                <button type="submit" class="btn btn-warning float-right mr-6">Update </button>
+            </form>
+        </div>
+</div>
+</div>
+
+{% endblock %}
+
+
+

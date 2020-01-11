@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block main %}
+
+
+<form method="post" enctype="multipart/form-data">{% csrf_token %}
+
+    <p style="color: red;" >{{error_message}}</p>
+    {{profile_form|crispy}}
+    {{profile_image_form|crispy}}
+    <button type="submit">Submit</button>
+    
+</form>
+
+{% endblock %}

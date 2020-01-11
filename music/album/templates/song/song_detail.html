@@ -1,0 +1,23 @@
+{% extends 'album/base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if object %}
+        <p><strong> {{object.song_title}} </strong> </p>
+    {% endif %}
+
+
+<div>
+    {% if vote_form %}
+        <form action="{{vote_url}}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ vote_form.as_table }}
+            <button class="btn btn-primary" type="submit" >Vote</button>
+        </form>
+    {%  else %}
+        <p>Login to vote for this Song</p>
+    {% endif %}
+
+    </div>
+</div>
+{% endblock %}

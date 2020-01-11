@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load socialaccount %}
+
+{% providers_media_js %}
+
+{% block main %}
+
+{% load crispy_forms_tags %}
+
+    <h2><strong> Register for cls-Pro</strong></h2>
+
+    
+        <form  method="post" data-validate-username-url="{% url 'user:validate_username' %}">
+            {% csrf_token %}
+<!-- {{form|crispy}} -->
+
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.username|as_crispy_field}}                   
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{form.email|as_crispy_field}}
+                </div>
+            </div>
+            <div><label id="inval" style="color: red; font-size: smaller; visibility: hidden">Invalied {{data.error_message}} </label></div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6 mb-0">
+                  {{form.birth_date|as_crispy_field}}                   
+              </div>
+          </div>
+            
+
+            <div class="form-row">
+                <div class="form-group col-md-6 mb-0">
+                    {{form.password1|as_crispy_field}}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{form.password2|as_crispy_field}}
+                </div>
+            </div>
+            
+            <button class="btn btn-success" type="submit">Rgister</button>
+            <a href="{% provider_login_url 'facebook' method='oauth2' %}">Facebook</a>
+            <a href="{% provider_login_url 'google' %}">Google</a>
+            
+        </form>
+    
+{% endblock %}
+
+{% block js %} 
+<script>
+    $("#id_username").change(function () {
+        console.log( $(this).val() );
+    });
+</script> 
+
+<script>
+        $("#id_username").change(function () {
+          var form = $(this).closest("form");
+          $.ajax({
+            url: form.attr("data-validate-username-url"),
+            data: form.serialize(),
+            dataType: 'json',
+            success: function (data) {
+              if (data.is_taken) {
+                document.getElementById("inval").style.visibility="visible";
+                document.getElementById("inval").innerHTML=data.error_message;
+                // alert(data.error_message);
+              }
+              else{
+                document.getElementById("inval").style.visibility="hidden";
+              }
+            }
+          });
+    
+        });
+      </script>
+
+{% endblock %}
