@@ -1,4 +1,4 @@
-Django==2.2.6
+Django==2.2.22
 django-allauth==0.40.0
 django-axes==5.0.15
 django-crispy-forms==1.7.2
